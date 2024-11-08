@@ -6,6 +6,7 @@ import argparse
 import json
 import logging
 import os
+import subprocess
 import sys
 
 import requests
@@ -308,6 +309,25 @@ def readfile(filename):
         return open_file.read()
 
 
+def passthru(command):
+    # Execute the command and display the output
+    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE,
+stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+
+    # Print the output
+    if stdout:
+        print(stdout.decode(), end='')  # Print standard output
+    if stderr:
+        print(stderr.decode(), end='')   # Print standard error
+
+
+def spawn_shell(command_line):
+    if command_line == "!":
+        subprocess.run(['bash', '-li'])
+    else:
+        subprocess.run(['bash', '-c', command_line[1:]], env={"PS2": "(exit to return) >"})
+
 def main():
     """
     Main entry point for the CLI chat application.
@@ -350,6 +370,11 @@ def main():
                 if prompt == "\\exit":
                     Output().print("bye!")
                     break
+
+            if prompt.startswith("!"):
+                spawn_shell(prompt)
+                continue
+
             Output().print_answer(chat.prompt(prompt), chat, args)
             if args.oneshot:
                 break
