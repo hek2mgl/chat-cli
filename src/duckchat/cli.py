@@ -10,7 +10,9 @@ import sys
 
 import requests
 from rich.console import Console
+from rich.markdown import Markdown
 from rich.prompt import Prompt
+
 
 # Dictionary mapping model aliases to their respective identifiers.
 models = {
@@ -125,6 +127,7 @@ class Output(Console):
 
         chat.messages.append({"content": msg, "role": "assistant"})
 
+        new_buffer = ""
         printing = False
         for ln, line in enumerate(buffer.split("\n")):
             if "```" in line and not printing and args.print_file:
@@ -136,9 +139,10 @@ class Output(Console):
                 continue
 
             if printing or not args.print_file:
-                if ln == 0 and not args.oneshot:
-                    line = f"🤖 [cyan]{args.model}[default]: {line}"
-                Output().print(line)
+                new_buffer += line + "\n"
+
+        Output().print(f"🤖 [cyan]{args.model}[default]: ", end="")
+        Output().print(Markdown(new_buffer))
 
 
 class Chat:
@@ -275,6 +279,7 @@ def input_prompt():
         if not prompt:
             Output().print("[dark_red]Your prompt is empty!")
             continue
+        Output().print("---")
         return prompt
 
 
@@ -338,6 +343,7 @@ def main():
             Output().print_answer(chat.prompt(prompt), chat, args)
             if args.oneshot:
                 break
+            Output().print("---")
 
     except (KeyboardInterrupt, EOFError):
         print("")
