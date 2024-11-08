@@ -80,9 +80,18 @@ class Output(Console):
     Inherits from rich.console.Console to provide enhanced output formatting.
     """
 
-    def hello(self):
+    def hello(self, args):
         """Print a welcome message to the console."""
-        print("Welcome to aipy cli chat", file=sys.stderr)
+        self.print("""[cyan]
+ ____             _       ____ _           _
+|  _ \ _   _  ___| | __  / ___| |__   __ _| |_
+| | | | | | |/ __| |/ / | |   | '_ \ / _` | __|
+| |_| | |_| | (__|   <  | |___| | | | (_| | |_
+|____/ \__,_|\___|_|\_\  \____|_| |_|\__,_|\__|
+
+                   """)
+        self.print(f"[cyan]Welcome to DuckChat! Your assistant is {args.model}")
+        self.print("---")
 
     def print_models(self):
         """Print the available models to the console.
@@ -327,6 +336,7 @@ def main():
         models[args.model],
     )
 
+    output.hello(args)
     chat.setup()
 
     try:

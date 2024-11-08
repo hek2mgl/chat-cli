@@ -1,3 +1,12 @@
+```
+ ____             _       ____ _           _
+|  _ \ _   _  ___| | __  / ___| |__   __ _| |_
+| | | | | | |/ __| |/ / | |   | '_ \ / _` | __|
+| |_| | |_| | (__|   <  | |___| | | | (_| | |_
+|____/ \__,_|\___|_|\_\  \____|_| |_|\__,_|\__|
+
+```
+
 # CLI Based AI Chat Application
 
 This is a command-line interface (CLI) based AI chat application that allows users to interact with various 
