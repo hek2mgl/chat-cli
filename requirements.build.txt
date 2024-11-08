@@ -1,0 +1,8 @@
+bandit
+black
+diff-cover
+flake8
+isort
+pytest
+pytest-coverage
+pytest-mock
