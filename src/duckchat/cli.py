@@ -137,7 +137,7 @@ class Output(Console):
 
             if printing or not args.print_file:
                 if ln == 0 and not args.oneshot:
-                    line = f"[cyan]{args.model}: {line}"
+                    line = f"🤖 [cyan]{args.model}[default]: {line}"
                 Output().print(line)
 
 
@@ -271,7 +271,7 @@ def input_prompt():
     """
     while True:
         username = os.environ.get("USER", "me")
-        prompt = Prompt.ask(f"[yellow]{username}").strip()
+        prompt = Prompt.ask(f"🦆 [yellow]{username}").strip()
         if not prompt:
             Output().print("[dark_red]Your prompt is empty!")
             continue
