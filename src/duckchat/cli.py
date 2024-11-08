@@ -339,7 +339,7 @@ def main():
             if args.oneshot:
                 break
 
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         print("")
         return 1
 
