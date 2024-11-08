@@ -44,12 +44,6 @@ def create_argparser():
     )
 
     parser.add_argument(
-        "-p",
-        "--prompt",
-        help="Initial prompt",
-    )
-
-    parser.add_argument(
         "-f",
         "--file",
         help="Append contents of file to prompt",
@@ -63,7 +57,8 @@ def create_argparser():
 
     parser.add_argument(
         "--oneshot",
-        action="store_true",
+        metavar="PROMPT",
+        help="Run prompt and exit",
     )
 
     parser.add_argument(
@@ -332,7 +327,7 @@ def main():
     try:
         while True:
             if args.oneshot:
-                prompt = args.prompt
+                prompt = args.oneshot
                 if args.file:
                     prompt += " " + readfile(args.file)
             else:
