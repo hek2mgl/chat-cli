@@ -18,8 +18,8 @@ import requests
 import rich.console
 from rich.markdown import Markdown
 
-from duckchat import __version__
-from duckchat.duckduckgo import (
+from chatcli import __version__
+from chatcli.duckduckgo import (
     ChatApiClient,
     ChatApiResponse,
     PromptResponse,
@@ -148,7 +148,7 @@ class UserInterface():
 
     def print_welcome_msg(self, args):
         """Print a welcome message to the console."""
-        msg = f"[cyan]Welcome to duckchat-{__version__}, model: {args.model}"
+        msg = f"[cyan]Welcome to chatcli-{__version__}, model: {args.model}"
         self.output.print(msg)
         self.output.print("---")
 

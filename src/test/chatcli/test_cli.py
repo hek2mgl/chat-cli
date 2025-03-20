@@ -3,7 +3,7 @@ from pdb import set_trace as bp
 import pytest
 import requests
 
-from duckchat.cli import *
+from chatcli.cli import *
 
 
 def test_create_argparser():
@@ -71,10 +71,10 @@ def test_main(
     cli_args.one_shot = cli_arg_one_shot
     argparser = mocker.Mock()
     argparser.parse_args.return_value = cli_args
-    mocker.patch("duckchat.cli.create_argparser", return_value=argparser)
-    mocker.patch("duckchat.cli.readfile", return_value="test")
-    mocker.patch("duckchat.cli.UserInterface.read_prompt", return_value="test prompt")
-    mocker.patch("duckchat.cli.init_chat_api_client")
+    mocker.patch("chatcli.cli.create_argparser", return_value=argparser)
+    mocker.patch("chatcli.cli.readfile", return_value="test")
+    mocker.patch("chatcli.cli.UserInterface.read_prompt", return_value="test prompt")
+    mocker.patch("chatcli.cli.init_chat_api_client")
     prompt_response = mocker.Mock(spec=["text"])
     prompt_response.text.return_value = "test response"
 
@@ -84,11 +84,11 @@ def test_main(
         assert main() == 1
     elif prompt_exception:
         mocker.patch(
-            "duckchat.cli.ChatApi.prompt",
+            "chatcli.cli.ChatApi.prompt",
             side_effect=requests.exceptions.HTTPError(response=mocker.Mock()),
         )
         assert main() == 1
     else:
         # An EOFError needs to get injected to break the UI endless loop
-        mocker.patch("duckchat.cli.ChatApiClient.prompt", side_effect=[prompt_response, EOFError])
+        mocker.patch("chatcli.cli.ChatApiClient.prompt", side_effect=[prompt_response, EOFError])
         assert main() == 0

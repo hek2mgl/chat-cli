@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "duckchat"
+name = "chatcli"
 version = "0.1.0"
 dependencies = [
     "google_speech",
@@ -24,11 +24,11 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/hek2mgl/duckchat.git"
-Issues = "https://github.com/hek2mgl/duckchat/issues"
+Homepage = "https://github.com/hek2mgl/chatcli.git"
+Issues = "https://github.com/hek2mgl/chatcli/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/duckchat"]
+packages = ["src/chatcli"]
 
 [project.scripts]
-duckchat = "duckchat.cli:main"
+chatcli = "chatcli.cli:main"

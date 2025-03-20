@@ -1,2 +1,2 @@
 docker-build-local:
-	docker build -t duckchat .
+	docker build -t chatcli .

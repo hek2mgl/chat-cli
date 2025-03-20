@@ -1,14 +1,7 @@
-```
- ____             _       ____ _           _
-|  _ \ _   _  ___| | __  / ___| |__   __ _| |_
-| | | | | | |/ __| |/ / | |   | '_ \ / _` | __|
-| |_| | |_| | (__|   <  | |___| | | | (_| | |_
-|____/ \__,_|\___|_|\_\  \____|_| |_|\__,_|\__|
-
-```
+# chatcli
 
 This is a command-line interface (CLI) based AI chat application that allows users to interact with the various 
-AI models offered by [DuckDuckGo's AI chat](https://duck.ai).
+AI models offered by [DuckDuckGo's AI chat](https://duck.ai). Other models and providers may be added later.
 
 ## Features
 
@@ -17,18 +10,18 @@ AI models offered by [DuckDuckGo's AI chat](https://duck.ai).
 - **File Input**: Append contents of a file to your prompt. (Allows to modify files easily)
 - **Run shell commands from inside the chat**
 - **Pipe shell output into the chat**
-- **Text to speech support (experimental)**: Listen to AI generated stories while coding :)!
+- **Text to speech support (experimental)**: Listen to AI generated stories while coding :)! 
 - **Model Selection**: Choose from a variety of AI models for your chat.
 
 ## Installation
 
 ```console
-git clone https://github.com/hek2mgl/duckchat
-cd duckchat
+git clone https://github.com/hek2mgl/chatcli
+cd chatcli
 python3 -mvenv venv
 source venv/bin/activate
 pip install .
-duckchat --help
+chatcli --help
 ```
 
 ## Usage
@@ -38,58 +31,58 @@ duckchat --help
 1. **Start an interative chat with the default model**:
 
 ```console
-duckchat
+chatcli
 ```
 
 2. **List available models**:
 
 ```console
-duckchat --list-models
+chatcli --list-models
 ```
 
 3. **Use a specific model**:
 
 ```console
-duckchat --model claude-3-haiku
+chatcli --model claude-3-haiku
 ```
 
 4. **Run a one-shot prompt**:
 
 ```console
-duckchat --oneshot "What is the capital of France?"
+chatcli --oneshot "What is the capital of France?"
 # short version
-duckchat -s "What is the capital of France?"
+chatcli -s "What is the capital of France?"
 ```
 
 5. **The prompt from the file (implies --oneshot)**:
 
 ```console
-duckchat -f my_prompt.txt
-duckchat -s 'summarize' -f my_text.txt
-duckchat -s 'translate' -f my_text.txt
-duckchat -s 'remove trailing whitespace' -f my_code.py
-some_program_with_error_msg | duckchat -s 'explain' -f /dev/stdin
+chatcli -f my_prompt.txt
+chatcli -s 'summarize' -f my_text.txt
+chatcli -s 'translate' -f my_text.txt
+chatcli -s 'remove trailing whitespace' -f my_code.py
+some_program_with_error_msg | chatcli -s 'explain' -f /dev/stdin
 ```
 
 6. **Text to speech support (experimental)**
 
-duckchat supports text to speech (tts) via the Google text to speak API.
+chatcli supports text to speech (tts) via the Google text to speak API.
 
 Note! You need a working speaker to hear the voice.
 
-Note! The AI answers will be sent to Google's text to speech API. duckchat
+Note! The AI answers will be sent to Google's text to speech API. chatcli
 will not share account credentials or login at Google, but if you are
-concerned about your privacy, then don't use this feature!
+concerned about your privacy don't use this feature.
 
 ```console
-duckchat --tts
-duckchat --tts -s 'hello world'
+chatcli --tts
+chatcli --tts -s 'hello world'
 ```
 
 6. **Enable debug output**:
 
 ```console
-duckchat --debug
+chatcli --debug
 ```
 
 ## Chat commands

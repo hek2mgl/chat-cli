@@ -1,9 +1,9 @@
 """
-tests for duckchat.duckduckgo
+tests for chatcli.duckduckgo
 """
 import pytest
 
-from duckchat.duckduckgo import *
+from chatcli.duckduckgo import *
 
 
 class TestApiResponse:
@@ -110,7 +110,7 @@ class TestChatApiClient():
         session.get.return_value = http_response
         mocker.patch.object(instance, "_get_session", return_value=session)
         mocker.patch(
-            "duckchat.cli.PromptResponse._slurp_response_stream", return_value="test"
+            "chatcli.cli.PromptResponse._slurp_response_stream", return_value="test"
         )
 
         if vqd is None:
@@ -135,7 +135,7 @@ class TestChatApiClient():
         session.post.return_value = http_response
         mocker.patch.object(instance, "_get_session", return_value=session)
         mocker.patch(
-            "duckchat.cli.PromptResponse._slurp_response_stream", return_value="test"
+            "chatcli.cli.PromptResponse._slurp_response_stream", return_value="test"
         )
 
         instance.prompt("test")
