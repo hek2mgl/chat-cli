@@ -18,11 +18,19 @@ class ChatApiResponse:
 
     def vqd(self):
         """
-        The DuckDuckGo api is using a custom HTTP header value that needs
-        to be sent with every request. The value is changing with every
+        The DuckDuckGo api is using custom HTTP header values which need
+        to be sent with every request. Their value is changing with every
         api response.
         """
         return self.http_response.headers["x-vqd-4"]
+
+    def vqd_hash1(self):
+        """
+        The DuckDuckGo api is using custom HTTP header values which need
+        to be sent with every request. Their value is changing with every
+        api response.
+        """
+        return self.http_response.headers["x-vqd-hash-1"]
 
 
 class PromptResponse(ChatApiResponse):
@@ -104,6 +112,7 @@ class ChatApiClient:
         self.model = model
         self.messages = []
         self.vqd = None
+        self.vqd_hash1 = None
         self.log = logging.getLogger("chat")
         self._session = None
 
@@ -130,11 +139,16 @@ class ChatApiClient:
         http_response = session.get(url, headers=headers)
         http_response.raise_for_status()
 
-        self.vqd = ChatApiResponse(http_response).vqd()
+        api_response = ChatApiResponse(http_response)
+        self.vqd = api_response.vqd()
+        self.vqd_hash1 = api_response.vqd_hash1()
+
         self.log.debug("Obtained vqd: %s", self.vqd)
 
         if not self.vqd:
             raise RuntimeError("Failed to obtain vqd")
+
+        return api_response
 
     def prompt(
         self,
@@ -158,6 +172,7 @@ class ChatApiClient:
 
         headers = {
             "x-vqd-4": self.vqd,
+            "x-vqd-hash-1": self.vqd_hash1,
             "Content-Type": "application/json",
             "Accept-Encoding": "gzip, deflate, br",
         }
