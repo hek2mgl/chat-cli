@@ -30,7 +30,7 @@ models = {
     "gpt-4o-mini": "gpt-4o-mini",
     "claude-3-haiku": "claude-3-haiku-20240307",
     "llama": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
-    "mixtral": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "mistral": "mistralai/Mistral-Small-24B-Instruct-2501",
 }
 
 
